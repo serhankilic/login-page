@@ -1,3 +1,39 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { navigateTo } from '#app'
+
+// Kullanıcı bilgileri
+const users = [
+    { username: 'han', password: 'bruna' },
+    { username: 'eren', password: 'meva' },
+]
+
+// Şifrenin görünürlüğünü kontrol eden değişken
+const showPassword = ref(false)
+
+// Kullanıcı giriş bilgileri
+const username = ref('')
+const password = ref('')
+const loginError = ref(false)
+
+// Giriş doğrulama fonksiyonu
+const validateLogin = () => {
+    // Girilen bilgilere sahip kullanıcıyı ara
+    const foundUser = users.find(
+        (user) =>
+            user.username === username.value && user.password === password.value
+    )
+
+    if (foundUser) {
+        loginError.value = false
+        // Ana sayfaya yönlendir
+        navigateTo('/')
+    } else {
+        loginError.value = true
+    }
+}
+</script>
+
 <template>
     <div class="login-container">
         <div class="login-content-container">
@@ -69,6 +105,7 @@
         </div>
     </div>
 </template>
+
 <style>
 * {
     padding: 0;
@@ -211,36 +248,3 @@
     }
 }
 </style>
-<script setup lang="ts">
-import { ref } from 'vue'
-
-// Kullanıcı bilgileri
-const users = [
-    { username: 'han', password: 'bruna' },
-    { username: 'eren', password: 'meva' },
-]
-
-// Şifrenin görünürlüğünü kontrol eden değişken
-const showPassword = ref(false)
-
-// Kullanıcı giriş bilgileri
-const username = ref('')
-const password = ref('')
-const loginError = ref(false)
-
-// Giriş doğrulama fonksiyonu
-const validateLogin = () => {
-    // Girilen bilgilere sahip kullanıcıyı ara
-    const foundUser = users.find(
-        (user) =>
-            user.username === username.value && user.password === password.value
-    )
-
-    if (foundUser) {
-        loginError.value = false
-        alert('Hoşgeldiniz!')
-    } else {
-        loginError.value = true
-    }
-}
-</script>
