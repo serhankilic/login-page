@@ -26,6 +26,8 @@ const validateLogin = () => {
 
     if (foundUser) {
         loginError.value = false
+        // Kullanıcı adını localStorage'a kaydet
+        localStorage.setItem('loggedInUser', username.value)
         // Ana sayfaya yönlendir
         navigateTo('/')
     } else {
